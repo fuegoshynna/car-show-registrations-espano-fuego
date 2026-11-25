@@ -44,3 +44,24 @@
 .empty-state-action {
   margin-top: 20px;
 }
+
+.empty-state-button {
+  padding: 10px 16px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  color: #334155;
+  background: #fff;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.empty-state-button:hover {
+  background: #f8fafc;
+}
+
+.empty-state-button:focus-visible {
+  outline: 3px solid rgba(37, 99, 235, 0.25);
+  outline-offset: 2px;
+}
