@@ -1,9 +1,10 @@
 import './EmptyState.css'
 
 function EmptyState({
-  title = 'No registrations found',
-  description = 'There are no registrations to display.',
-  action,
+  title = 'No registrations match your filters',
+  description = 'Try adjusting your search or filters.',
+  onClearFilters,
+  clearFiltersLabel = 'Clear filters',
 }) {
   return (
     <div className="empty-state" role="status">
@@ -15,7 +16,17 @@ function EmptyState({
       </div>
       <h3 className="empty-state-title">{title}</h3>
       <p className="empty-state-description">{description}</p>
-      {action && <div className="empty-state-action">{action}</div>}
+      {onClearFilters && (
+        <div className="empty-state-action">
+          <button
+            className="empty-state-button"
+            type="button"
+            onClick={onClearFilters}
+          >
+            {clearFiltersLabel}
+          </button>
+        </div>
+      )}
     </div>
   )
 }
