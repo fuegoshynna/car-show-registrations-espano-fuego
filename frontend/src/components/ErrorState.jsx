@@ -1,8 +1,8 @@
 import './ErrorState.css'
 
 function ErrorState({
-  title = 'Something went wrong',
-  description = 'We couldn’t load the registrations. Please try again.',
+  title = 'Cannot reach the API',
+  description = 'Please check your connection and try again.',
   onRetry,
   retryLabel = 'Try again',
 }) {
