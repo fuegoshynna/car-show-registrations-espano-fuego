@@ -39,15 +39,15 @@ export default function RegistrationTable({
   }
 
   return (
-    <div className="overflow-x-auto border-t border-slate-200" aria-busy={loading}>
+    <div className="overflow-x-auto" aria-busy={loading}>
       {loading && (
         <div role="status" className="sr-only">
           Loading registrations...
         </div>
       )}
 
-      <table className="min-w-full divide-y divide-slate-100 text-left text-sm">
-        <thead className="bg-slate-50/80 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+      <table className="min-w-full divide-y divide-[#f0eee9] text-left text-sm">
+        <thead className="bg-[#f8f7f4] text-[10px] font-bold uppercase tracking-[0.12em] text-slate-500">
           <tr>
             <th scope="col" className="whitespace-nowrap px-5 py-3.5">Reg. No.</th>
             <th scope="col" className="whitespace-nowrap px-5 py-3.5">Date</th>
@@ -60,7 +60,7 @@ export default function RegistrationTable({
           </tr>
         </thead>
 
-        <tbody className="divide-y divide-slate-100 bg-white">
+        <tbody className="divide-y divide-[#f0eee9] bg-white">
           {loading
             ? Array.from({ length: rowsCount }).map((_, index) => (
                 <tr key={index} className="animate-pulse">
@@ -81,9 +81,9 @@ export default function RegistrationTable({
                 </tr>
               ))
             : items.map((row) => (
-                <tr key={row.id} className="transition-colors hover:bg-slate-50/80">
+                <tr key={row.id} className="transition-colors hover:bg-[#fffaf7]">
                   <td className="whitespace-nowrap px-5 py-4 text-xs font-semibold text-slate-700">
-                    <span className="rounded-md bg-slate-100 px-2 py-1">{row.registrationNumber}</span>
+                    <span className="rounded-md bg-[#f2f1ed] px-2 py-1 text-[11px] font-bold tracking-wide text-slate-600">{row.registrationNumber}</span>
                   </td>
                   <td className="whitespace-nowrap px-5 py-4 text-xs text-slate-600">
                     {formatDateTime(row.registrationDate)}

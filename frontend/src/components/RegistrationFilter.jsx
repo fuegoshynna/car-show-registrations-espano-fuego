@@ -10,7 +10,7 @@ export default function RegistrationFilters({
   const hasFilters = Boolean(searchInput || typeFilter || statusFilter);
 
   return (
-    <div className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(220px,1fr)_auto_auto_auto] sm:items-center">
+    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-[minmax(240px,1fr)_auto_auto_auto] sm:items-center">
       {/* Search participant name */}
       <div className="relative w-full">
         <label htmlFor="search-participant" className="sr-only">
@@ -33,7 +33,7 @@ export default function RegistrationFilters({
           value={searchInput}
           onChange={(e) => onSearchChange(e.target.value)}
           placeholder="Search participant name..."
-          className="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-9 pr-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          className="w-full rounded-xl border border-[#e5e2dc] bg-[#fbfaf8] py-2.5 pl-9 pr-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition focus:border-[#284163] focus:ring-2 focus:ring-[#284163]/10"
         />
       </div>
 
@@ -46,7 +46,7 @@ export default function RegistrationFilters({
           id="filter-type"
           value={typeFilter}
           onChange={(e) => onTypeChange(e.target.value)}
-          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200 sm:w-auto"
+          className="w-full rounded-xl border border-[#e5e2dc] bg-[#fbfaf8] px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-[#284163] focus:ring-2 focus:ring-[#284163]/10 sm:w-auto"
         >
           <option value="">Type</option>
           <option value="Exhibitor">Exhibitor</option>
@@ -64,7 +64,7 @@ export default function RegistrationFilters({
           id="filter-status"
           value={statusFilter}
           onChange={(e) => onStatusChange(e.target.value)}
-          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200 sm:w-auto"
+          className="w-full rounded-xl border border-[#e5e2dc] bg-[#fbfaf8] px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-[#284163] focus:ring-2 focus:ring-[#284163]/10 sm:w-auto"
         >
           <option value="">Status</option>
           <option value="Pending">Pending</option>
@@ -79,7 +79,7 @@ export default function RegistrationFilters({
         type="button"
         onClick={onClearFilters}
         disabled={!hasFilters}
-        className="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-45"
+        className="rounded-xl border border-[#e5e2dc] bg-white px-4 py-2.5 text-sm font-semibold text-slate-600 transition hover:border-[#e6b7b8] hover:bg-[#fdf4f4] hover:text-[#b91216] disabled:cursor-not-allowed disabled:opacity-45"
       >
         Clear
       </button>

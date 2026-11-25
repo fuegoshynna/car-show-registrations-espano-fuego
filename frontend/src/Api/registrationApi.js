@@ -1,4 +1,4 @@
-import * as sampleData from 'api/sample-data.js';
+import * as sampleData from '../api/sample-data.js';
 
 const BASE_URL = (import.meta.env.VITE_API_BASE_URL ?? "").replace(/\/$/, "");
 const INCLUDE_SAMPLE_DATA = import.meta.env.VITE_REGISTRATIONS_SOURCE === "sample";
