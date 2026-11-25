@@ -1,5 +1,7 @@
 import StatusBadge from './StatusBadge.jsx';
 import PaymentBadge from './PaymentBadge.jsx';
+import EmptyState from './EmptyState.jsx';
+import ErrorState from './ErrorState.jsx';
 
 const formatCurrency = (amount) =>
   `₱${Number(amount ?? 0).toLocaleString('en-PH', {
@@ -29,49 +31,11 @@ export default function RegistrationTable({
   rowsCount = 6,
 }) {
   if (error) {
-    return (
-      <div className="border-t border-slate-200 bg-rose-50/60 px-6 py-12 text-center">
-        <p className="text-sm font-semibold text-rose-800">Cannot reach the API...</p>
-        <p className="mt-1 text-xs text-rose-600">{error}</p>
-        <button
-          type="button"
-          onClick={onRetry}
-          className="mt-4 rounded-lg border border-rose-300 bg-white px-4 py-2 text-sm font-semibold text-rose-700 transition hover:bg-rose-50"
-        >
-          Try again
-        </button>
-      </div>
-    );
+    return <ErrorState error={error} onRetry={onRetry} />;
   }
 
   if (!loading && items.length === 0) {
-    return (
-      <div className="border-t border-slate-200 bg-white px-6 py-14 text-center">
-        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500">
-          <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
-            <path d="M8 6h13M8 12h13M8 18h13" />
-            <path d="M3 6h.01M3 12h.01M3 18h.01" strokeLinecap="round" />
-          </svg>
-        </div>
-        <p className="mt-4 text-sm font-semibold text-slate-900">
-          {hasFilters ? 'No registrations match your filters' : 'No registrations yet'}
-        </p>
-        <p className="mt-1 text-xs text-slate-500">
-          {hasFilters
-            ? 'Try adjusting your search or clearing the selected filters.'
-            : 'New entries will appear here once they have been registered.'}
-        </p>
-        {hasFilters && (
-          <button
-            type="button"
-            onClick={onClearFilters}
-            className="mt-4 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-          >
-            Clear filters
-          </button>
-        )}
-      </div>
-    );
+    return <EmptyState hasFilters={hasFilters} onClearFilters={onClearFilters} />;
   }
 
   return (
