@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "ynLRIjvk7rw=",
+  "dgSpecHash": "uv5fOjz07aA=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Shynna Fuego\\Desktop\\car_show_registrations\\backend\\Api\\Api.csproj",
+  "projectFilePath": "c:\\Users\\Shynna Fuego\\Desktop\\car_show_registrations\\backend\\car-show-registrations-espano-fuego\\backend\\Api\\Api.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Shynna Fuego\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
     "C:\\Users\\Shynna Fuego\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
@@ -19,9 +19,9 @@
       "code": "NU1903",
       "level": "Warning",
       "message": "Package 'Microsoft.OpenApi' 2.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-v5pm-xwqc-g5wc",
-      "projectPath": "C:\\Users\\Shynna Fuego\\Desktop\\car_show_registrations\\backend\\Api\\Api.csproj",
+      "projectPath": "c:\\Users\\Shynna Fuego\\Desktop\\car_show_registrations\\backend\\car-show-registrations-espano-fuego\\backend\\Api\\Api.csproj",
       "warningLevel": 1,
-      "filePath": "C:\\Users\\Shynna Fuego\\Desktop\\car_show_registrations\\backend\\Api\\Api.csproj",
+      "filePath": "c:\\Users\\Shynna Fuego\\Desktop\\car_show_registrations\\backend\\car-show-registrations-espano-fuego\\backend\\Api\\Api.csproj",
       "libraryId": "Microsoft.OpenApi",
       "targetGraphs": [
         "net10.0"

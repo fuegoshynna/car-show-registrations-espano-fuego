@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "mrf0liM1Gxg=",
+  "dgSpecHash": "vRzQZOMiFZY=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Shynna Fuego\\Desktop\\car_show_registrations\\backend\\Infrastructure\\Infrastructure.csproj",
+  "projectFilePath": "c:\\Users\\Shynna Fuego\\Desktop\\car_show_registrations\\backend\\car-show-registrations-espano-fuego\\backend\\Infrastructure\\Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Shynna Fuego\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
     "C:\\Users\\Shynna Fuego\\.nuget\\packages\\fluentvalidation.dependencyinjectionextensions\\11.11.0\\fluentvalidation.dependencyinjectionextensions.11.11.0.nupkg.sha512",
