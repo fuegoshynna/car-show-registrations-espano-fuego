@@ -1,88 +1,162 @@
-export default function RegistrationFilters({
-  searchInput,
-  onSearchChange,
-  typeFilter,
-  onTypeChange,
-  statusFilter,
-  onStatusChange,
+import StatusBadge from './StatusBadge.jsx';
+import PaymentBadge from './PaymentBadge.jsx';
+
+const formatCurrency = (amount) =>
+  `₱${Number(amount ?? 0).toLocaleString('en-PH', {
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  })}`;
+
+const formatDateTime = (isoString) => {
+  if (!isoString) return '—';
+  return new Intl.DateTimeFormat('en-US', {
+    month: 'short',
+    day: '2-digit',
+    year: 'numeric',
+    hour: '2-digit',
+    minute: '2-digit',
+    hour12: true,
+  }).format(new Date(isoString));
+};
+
+export default function RegistrationTable({
+  items,
+  loading,
+  error,
+  onRetry,
   onClearFilters,
+  hasFilters,
+  rowsCount = 6,
 }) {
-  const hasFilters = Boolean(searchInput || typeFilter || statusFilter);
+  if (error) {
+    return (
+      <div className="border-t border-slate-200 bg-rose-50/60 px-6 py-12 text-center">
+        <p className="text-sm font-semibold text-rose-800">Cannot reach the API...</p>
+        <p className="mt-1 text-xs text-rose-600">{error}</p>
+        <button
+          type="button"
+          onClick={onRetry}
+          className="mt-4 rounded-lg border border-rose-300 bg-white px-4 py-2 text-sm font-semibold text-rose-700 transition hover:bg-rose-50"
+        >
+          Try again
+        </button>
+      </div>
+    );
+  }
+
+  if (!loading && items.length === 0) {
+    return (
+      <div className="border-t border-slate-200 bg-white px-6 py-14 text-center">
+        <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-slate-100 text-slate-500">
+          <svg className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.7" aria-hidden="true">
+            <path d="M8 6h13M8 12h13M8 18h13" />
+            <path d="M3 6h.01M3 12h.01M3 18h.01" strokeLinecap="round" />
+          </svg>
+        </div>
+        <p className="mt-4 text-sm font-semibold text-slate-900">
+          {hasFilters ? 'No registrations match your filters' : 'No registrations yet'}
+        </p>
+        <p className="mt-1 text-xs text-slate-500">
+          {hasFilters
+            ? 'Try adjusting your search or clearing the selected filters.'
+            : 'New entries will appear here once they have been registered.'}
+        </p>
+        {hasFilters && (
+          <button
+            type="button"
+            onClick={onClearFilters}
+            className="mt-4 rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
+          >
+            Clear filters
+          </button>
+        )}
+      </div>
+    );
+  }
 
   return (
-    <div className="grid grid-cols-1 gap-2 sm:grid-cols-[minmax(220px,1fr)_auto_auto_auto] sm:items-center">
-      {/* Search participant name */}
-      <div className="relative w-full">
-        <label htmlFor="search-participant" className="sr-only">
-          Search participant name
-        </label>
-        <svg
-          className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          aria-hidden="true"
-        >
-          <circle cx="11" cy="11" r="8" />
-          <line x1="21" x2="16.65" y1="21" y2="16.65" />
-        </svg>
-        <input
-          id="search-participant"
-          type="text"
-          value={searchInput}
-          onChange={(e) => onSearchChange(e.target.value)}
-          placeholder="Search participant name..."
-          className="w-full rounded-lg border border-slate-300 bg-white py-2.5 pl-9 pr-3 text-sm text-slate-800 placeholder:text-slate-400 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
-        />
-      </div>
+    <div className="overflow-x-auto border-t border-slate-200" aria-busy={loading}>
+      {loading && (
+        <div role="status" className="sr-only">
+          Loading registrations...
+        </div>
+      )}
 
-      {/* Type dropdown */}
-      <div>
-        <label htmlFor="filter-type" className="sr-only">
-          Type
-        </label>
-        <select
-          id="filter-type"
-          value={typeFilter}
-          onChange={(e) => onTypeChange(e.target.value)}
-          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200 sm:w-auto"
-        >
-          <option value="">Type</option>
-          <option value="Exhibitor">Exhibitor</option>
-          <option value="Competitor">Competitor</option>
-          <option value="VIP">VIP</option>
-        </select>
-      </div>
+      <table className="min-w-full divide-y divide-slate-100 text-left text-sm">
+        <thead className="bg-slate-50/80 text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+          <tr>
+            <th scope="col" className="whitespace-nowrap px-5 py-3.5">Reg. No.</th>
+            <th scope="col" className="whitespace-nowrap px-5 py-3.5">Date</th>
+            <th scope="col" className="whitespace-nowrap px-5 py-3.5">Participant</th>
+            <th scope="col" className="whitespace-nowrap px-5 py-3.5">Car</th>
+            <th scope="col" className="whitespace-nowrap px-5 py-3.5">Type</th>
+            <th scope="col" className="whitespace-nowrap px-5 py-3.5">Status</th>
+            <th scope="col" className="whitespace-nowrap px-5 py-3.5 text-right">Fee / Paid</th>
+            <th scope="col" className="whitespace-nowrap px-5 py-3.5">Payment</th>
+          </tr>
+        </thead>
 
-      {/* Status dropdown */}
-      <div>
-        <label htmlFor="filter-status" className="sr-only">
-          Status
-        </label>
-        <select
-          id="filter-status"
-          value={statusFilter}
-          onChange={(e) => onStatusChange(e.target.value)}
-          className="w-full rounded-lg border border-slate-300 bg-white px-3 py-2.5 text-sm text-slate-700 outline-none transition focus:border-slate-500 focus:ring-2 focus:ring-slate-200 sm:w-auto"
-        >
-          <option value="">Status</option>
-          <option value="Pending">Pending</option>
-          <option value="Confirmed">Confirmed</option>
-          <option value="CheckedIn">Checked In</option>
-          <option value="Cancelled">Cancelled</option>
-        </select>
-      </div>
-
-      {/* Clear button */}
-      <button
-        type="button"
-        onClick={onClearFilters}
-        disabled={!hasFilters}
-        className="rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-45"
-      >
-        Clear
-      </button>
+        <tbody className="divide-y divide-slate-100 bg-white">
+          {loading
+            ? Array.from({ length: rowsCount }).map((_, index) => (
+                <tr key={index} className="animate-pulse">
+                  <td className="px-5 py-4"><div className="h-3.5 w-20 rounded bg-slate-200" /></td>
+                  <td className="px-5 py-4"><div className="h-3.5 w-28 rounded bg-slate-200" /></td>
+                  <td className="px-5 py-4">
+                    <div className="h-3.5 w-32 rounded bg-slate-200" />
+                    <div className="mt-1.5 h-2.5 w-24 rounded bg-slate-100" />
+                  </td>
+                  <td className="px-5 py-4">
+                    <div className="h-3.5 w-32 rounded bg-slate-200" />
+                    <div className="mt-1.5 h-2.5 w-16 rounded bg-slate-100" />
+                  </td>
+                  <td className="px-5 py-4"><div className="h-3.5 w-16 rounded bg-slate-200" /></td>
+                  <td className="px-5 py-4"><div className="h-5 w-20 rounded-full bg-slate-200" /></td>
+                  <td className="px-5 py-4"><div className="ml-auto h-3.5 w-24 rounded bg-slate-200" /></td>
+                  <td className="px-5 py-4"><div className="h-5 w-16 rounded-full bg-slate-200" /></td>
+                </tr>
+              ))
+            : items.map((row) => (
+                <tr key={row.id} className="transition-colors hover:bg-slate-50/80">
+                  <td className="whitespace-nowrap px-5 py-4 text-xs font-semibold text-slate-700">
+                    <span className="rounded-md bg-slate-100 px-2 py-1">{row.registrationNumber}</span>
+                  </td>
+                  <td className="whitespace-nowrap px-5 py-4 text-xs text-slate-600">
+                    {formatDateTime(row.registrationDate)}
+                  </td>
+                  <td className="px-5 py-4">
+                    <div className="text-sm font-medium text-slate-900">
+                      {row.participantName}
+                    </div>
+                    <div className="text-xs text-slate-400">
+                      {row.contactNumber}
+                    </div>
+                  </td>
+                  <td className="px-5 py-4">
+                    <div className="text-sm text-slate-800">{row.carMakeModel}</div>
+                    <div className="text-xs text-slate-400">{row.plateNumber}</div>
+                  </td>
+                  <td className="whitespace-nowrap px-5 py-4 text-xs text-slate-700">
+                    {row.registrationType}
+                  </td>
+                  <td className="whitespace-nowrap px-5 py-4">
+                    <StatusBadge status={row.status} />
+                  </td>
+                  <td className="whitespace-nowrap px-5 py-4 text-right text-xs">
+                    <div className="font-medium text-slate-800">
+                      {formatCurrency(row.registrationFee)}
+                    </div>
+                    <div className="text-slate-400">
+                      {formatCurrency(row.amountPaid)}
+                    </div>
+                  </td>
+                  <td className="whitespace-nowrap px-5 py-4">
+                    <PaymentBadge paymentStatus={row.paymentStatus} />
+                  </td>
+                </tr>
+              ))}
+        </tbody>
+      </table>
     </div>
   );
 }
