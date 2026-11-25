@@ -2,18 +2,39 @@
 
 @layer base {
   :root {
-    font-family: "Inter", system-ui, -apple-system, sans-serif;
+    font-family: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
   }
 
   body {
-    background-color: var(--color-slate-50);
+    min-width: 320px;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #f1f3f5;
     color: var(--color-slate-900);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   ::selection {
-    background-color: var(--color-indigo-100);
-    color: var(--color-indigo-900);
+    background-color: #e5eaf0;
+    color: #284163;
   }
+}
+
+.registration-modal input,
+.registration-modal select {
+  border-color: #e5e2dc;
+  border-radius: 0.75rem;
+  background-color: #fbfaf8;
+  padding: 0.625rem 0.75rem;
+  outline: none;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.registration-modal input:focus,
+.registration-modal select:focus {
+  border-color: #284163;
+  box-shadow: 0 0 0 3px rgb(40 65 99 / 12%);
 }
